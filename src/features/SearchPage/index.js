@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { SearchPresentation } from './components';
+import * as BooksAPI from '../../BooksAPI';
 
 export default class SearchPage extends Component { // eslint-disable-line
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+      results: [],
+    };
+  }
+  handleChange = (e) => {
+    const input = e.target.value;
+    this.setState({ input });
+    BooksAPI.search(input, 20)
+      .then(results => this.setState({ results }));
+  };
   render() {
     return (
       <Route
         exact
         path="/search"
         render={() => (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a role="button" className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
-              <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" />
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid" />
-            </div>
-          </div>
+          <SearchPresentation
+            {...this.state}
+            onInput={this.handleChange}
+          />
         )}
       />
     );
