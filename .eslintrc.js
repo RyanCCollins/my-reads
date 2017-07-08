@@ -10,6 +10,7 @@ module.exports = {
   },
   "rules": {
     "func-names": 0,
+    "jsx-a11y/no-autofocus": 0,
     "eol-last": 0,
     "react/no-unused-prop-types": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function SearchBar({ onInput, input }) {
@@ -7,6 +8,7 @@ export default function SearchBar({ onInput, input }) {
       <Link to="/" className="close-search">Close</Link>
       <div className="search-books-input-wrapper">
         <input
+          autoFocus
           onChange={onInput}
           value={input}
           type="text"

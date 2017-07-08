@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SearchResults, SearchBar } from '../';
 
 export default function SearchPresentation({ results, ...rest }) {
@@ -11,3 +12,9 @@ export default function SearchPresentation({ results, ...rest }) {
     </div>
   );
 }
+
+SearchPresentation.propTypes = {
+  results: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
+};
