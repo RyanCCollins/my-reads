@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { BookShelf } from '../';
 import uuid from '../../../../utils/uuid';
 
-export default function BookShelves({ shelves }) {
+export default function BookShelves({ shelves, onChangeBookShelf }) {
   return (
     <div>
       {Object.keys(shelves).map(shelf =>
         (<BookShelf
+          onChangeBookShelf={onChangeBookShelf}
           key={uuid()}
           title={shelf}
           books={shelves[shelf]}
@@ -18,6 +19,7 @@ export default function BookShelves({ shelves }) {
 }
 
 BookShelves.propTypes = {
+  onChangeBookShelf: PropTypes.func.isRequired,
   shelves: PropTypes.shape({
     currentlyReading: PropTypes.arrayOf(
       PropTypes.object,

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Book } from '../../../../components';
+import { Book } from '../../../../ui';
+import uuid from '../../../../utils/uuid';
 
 export default function BookShelf({
   title,
   books,
+  onChangeBookShelf,
 }) {
   return (
     <div className="bookshelf">
@@ -11,10 +13,12 @@ export default function BookShelf({
       <div className="bookshelf-books">
         <ol className="books-grid">
           {books.map(book => (
-            <li>
+            <li key={`${uuid()}-${book.id}`}>
               <Book
+                onChangeBookShelf={shelf => onChangeBookShelf(book, shelf)}
+                shelf={book.shelf}
                 title={book.title}
-                author={book.authors[0]}
+                author={book.authors && book.authors.length ? book.authors[0] : 'Unknown Author'}
                 image={book.imageLinks.smallThumbnail}
               />
             </li>
@@ -27,6 +31,7 @@ export default function BookShelf({
 }
 
 BookShelf.propTypes = {
+  onChangeBookShelf: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   books: PropTypes.arrayOf(
     PropTypes.object,

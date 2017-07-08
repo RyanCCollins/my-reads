@@ -3,9 +3,15 @@ import { Route } from 'react-router-dom';
 import { SearchPresentation } from './components';
 import * as BooksAPI from '../../BooksAPI';
 
-export default class SearchPage extends Component { // eslint-disable-line
+export default class SearchPage extends Component {
   constructor() {
     super();
+    this.state = {
+      input: '',
+      results: [],
+    };
+  }
+  componentDidMount() {
     this.state = {
       input: '',
       results: [],
@@ -14,9 +20,16 @@ export default class SearchPage extends Component { // eslint-disable-line
   handleChange = (e) => {
     const input = e.target.value;
     this.setState({ input });
-    BooksAPI.search(input, 20)
-      .then(results => this.setState({ results }));
-  };
+    if (input === '') {
+      this.setState({
+        results: [],
+      });
+    } else {
+      BooksAPI.search(input, 20)
+        .then(results => results.filter(i => i.shelf === 'none'))
+        .then(results => this.setState({ results }));
+    }
+  }
   render() {
     return (
       <Route

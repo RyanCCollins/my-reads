@@ -5,6 +5,8 @@ import { BookShelfChanger } from '../';
 export default function Book({
   title,
   author,
+  shelf,
+  onChangeBookShelf,
   image,
 }) {
   return (
@@ -18,7 +20,10 @@ export default function Book({
             backgroundImage: `url("${image}")`,
           }}
         />
-        <BookShelfChanger />
+        <BookShelfChanger
+          onChange={onChangeBookShelf}
+          currentValue={shelf}
+        />
       </div>
       <div className="book-title">{title}</div>
       <div className="book-authors">{author}</div>
@@ -29,5 +34,7 @@ export default function Book({
 Book.propTypes = {
   title: PT.string.isRequired,
   author: PT.string.isRequired,
+  shelf: PT.string.isRequired,
   image: PT.string.isRequired,
+  onChangeBookShelf: PT.func.isRequired,
 };
