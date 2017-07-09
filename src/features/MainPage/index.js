@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { LoadingIndicator } from 'openui';
 import * as BooksAPI from '../../BooksAPI';
 import parseBooks from './utils/parseBooks';
-import { BookShelves } from './components';
+import { MainPagePresentation } from './components';
 
 export default class MainPage extends Component { // eslint-disable-line
 
@@ -43,22 +43,10 @@ export default class MainPage extends Component { // eslint-disable-line
         exact
         path="/"
         render={() => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              {this.state.books &&
-                <BookShelves
-                  onChangeBookShelf={this.handleChangingShelf}
-                  shelves={this.state.books}
-                />
-              }
-            </div>
-            <div className="open-search">
-              <Link to="/search">Add a book</Link>
-            </div>
-          </div>
+          <MainPagePresentation
+            {...this.state}
+            onChangeBookShelf={this.handleChangingShelf}
+          />
         )}
       />
     );
