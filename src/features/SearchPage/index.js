@@ -11,12 +11,14 @@ export default class SearchPage extends Component {
       results: [],
     };
   }
+  
   componentDidMount() {
     this.state = {
       input: '',
       results: [],
     };
   }
+  
   handleChange = (e) => {
     const input = e.target.value;
     this.setState({ input });
@@ -30,6 +32,7 @@ export default class SearchPage extends Component {
         .then(results => this.setState({ results }));
     }
   }
+  
   render() {
     return (
       <Route
